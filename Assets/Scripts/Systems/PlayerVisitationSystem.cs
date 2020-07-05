@@ -40,6 +40,10 @@ namespace FastCube.Systems
                 if (VisitedByPlayerEntities.HasComponent(triggerEvent.EntityB))
                     targetEntity = triggerEvent.EntityB;
 
+                // Tile was already destroyed
+                if (!VisitedByPlayerEntities.Exists(targetEntity))
+                    return;
+
                 var visitedByPlayerEntity = VisitedByPlayerEntities[targetEntity];
 
                 if (visitedByPlayerEntity.Value)

@@ -1,28 +1,55 @@
 using FastCube.Components;
+using FastCube.Generated;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FastCube.Systems
 {
-    public class InputSystem : SystemBase
+    public class InputSystem : SystemBase, InputActions.IGameplayActions
     {
         private const float MoveDistance = 1.2f;
 
         private EndSimulationEntityCommandBufferSystem _commandBufferSystem;
+
+        private float2 _input = float2.zero;
+
+        private InputActions _inputActions;
+
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            _input = new float2(context.ReadValue<Vector2>());
+        }
 
         protected override void OnCreate()
         {
             base.OnCreate();
             _commandBufferSystem =
                 World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+
+            _inputActions = new InputActions();
+            _inputActions.Gameplay.SetCallbacks(this);
+        }
+
+        protected override void OnStartRunning()
+        {
+            base.OnStartRunning();
+            _inputActions.Enable();
+        }
+
+        protected override void OnStopRunning()
+        {
+            base.OnStopRunning();
+            _inputActions.Disable();
         }
 
         protected override void OnUpdate()
         {
-            var verticalAxis = Input.GetAxis("Vertical");
-            var horizontalAxis = Input.GetAxis("Horizontal");
+            var horizontalAxis = _input.x;
+            var verticalAxis = _input.y;
+            _input = float2.zero;
 
             var ecb = _commandBufferSystem.CreateCommandBuffer().ToConcurrent();
             Entities

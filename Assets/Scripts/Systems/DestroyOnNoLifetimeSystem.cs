@@ -23,16 +23,17 @@ namespace FastCube.Systems
                 var levelData = EntityManager.GetComponentData<LevelGenerationData>(levelEntity);
 
                 var cb = _commandBufferSystem.CreateCommandBuffer().ToConcurrent();
-                Entities.ForEach((Entity entity, int entityInQueryIndex, in Lifetime lifetime) =>
-                {
-                    if (lifetime.Value >= 0.01f)
-                        return;
+                Entities.ForEach(
+                    (Entity entity, int entityInQueryIndex, in Lifetime lifetime) =>
+                    {
+                        if (lifetime.Value >= 0.0001f)
+                            return;
 
-                    levelData.CurrentTilesCount -= 1;
-                    cb.SetComponent(entityInQueryIndex, levelEntity, levelData);
+                        levelData.CurrentTilesCount -= 1;
+                        cb.SetComponent(entityInQueryIndex, levelEntity, levelData);
 
-                    cb.DestroyEntity(entityInQueryIndex, entity);
-                }).ScheduleParallel();
+                        cb.DestroyEntity(entityInQueryIndex, entity);
+                    }).Schedule();
 
                 _commandBufferSystem.AddJobHandleForProducer(Dependency);
             }

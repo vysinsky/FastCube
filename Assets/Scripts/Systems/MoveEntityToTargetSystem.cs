@@ -26,6 +26,8 @@ namespace FastCube.Systems
 
             var ecb = _commandBufferSystem.CreateCommandBuffer().ToConcurrent();
 
+            var scoreComponentEntities = GetComponentDataFromEntity<Score>();
+
             Entities
                 .ForEach(
                     (int entityInQueryIndex, Entity entity, ref Translation translation,
@@ -45,8 +47,15 @@ namespace FastCube.Systems
                             physicsVelocity.Linear = float3.zero;
                             physicsVelocity.Angular = float3.zero;
                             ecb.RemoveComponent<MoveToTarget>(entityInQueryIndex, entity);
+
+                            if (scoreComponentEntities.HasComponent(entity))
+                            {
+                                var score = scoreComponentEntities[entity];
+                                score.Value++;
+                                scoreComponentEntities[entity] = score;
+                            }
                         }
-                    }).ScheduleParallel();
+                    }).Schedule();
 
             _commandBufferSystem.AddJobHandleForProducer(Dependency);
         }

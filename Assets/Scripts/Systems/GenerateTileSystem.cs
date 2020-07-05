@@ -6,7 +6,6 @@ using Unity.Transforms;
 
 namespace FastCube.Systems
 {
-    [UpdateAfter(typeof(DestroyOnNoLifetimeSystem))]
     public class GenerateTileSystem : SystemBase
     {
         protected override void OnUpdate()

@@ -3,11 +3,9 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Physics;
 using Unity.Physics.Systems;
-using UnityEngine;
 
 namespace FastCube.Systems
 {
-    [UpdateInGroup(typeof(LateSimulationSystemGroup))]
     public class PlayerVisitationSystem : JobComponentSystem
     {
         private BuildPhysicsWorld _buildPhysicsWorld;

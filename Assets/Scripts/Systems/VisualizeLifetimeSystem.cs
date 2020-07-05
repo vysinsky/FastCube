@@ -1,9 +1,11 @@
+using System;
 using FastCube.Components;
 using Unity.Entities;
 using Unity.Transforms;
 
 namespace FastCube.Systems
 {
+    [UpdateInGroup(typeof(PresentationSystemGroup))]
     public class VisualiseLifetimeSystem : SystemBase
     {
         protected override void OnUpdate()
@@ -16,9 +18,14 @@ namespace FastCube.Systems
                     var prevY = scale.y;
                     var newY = lifeTime.Value;
 
+                    if (Math.Abs(prevY - newY) < 0.001f)
+                    {
+                        return;
+                    }
+
                     localToWorld.Value.c3.y += (prevY - newY) / 2;
                     localToWorld.Value.c1.y = newY;
-                }).ScheduleParallel();
+                }).Schedule();
         }
     }
 }

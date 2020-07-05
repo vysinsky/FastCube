@@ -73,17 +73,21 @@ namespace FastCube.Behaviours
                 GameObjectConversionUtility.ConvertGameObjectHierarchy(groundPrefab,
                     conversionSettings);
 
-            // dstManager.SetName(_playerEntityPrototype, "[Prefab] Player");
-            // dstManager.SetName(_startingGroundEntityPrototype, "[Prefab] StartingGround");
-            // dstManager.SetName(_groundEntityPrototype, "[Prefab] Ground");
+#if UNITY_EDITOR
+            dstManager.SetName(_playerEntityPrototype, "[Prefab] Player");
+            dstManager.SetName(_startingGroundEntityPrototype, "[Prefab] StartingGround");
+            dstManager.SetName(_groundEntityPrototype, "[Prefab] Ground");
+#endif
         }
 
         private void GenerateStartingGround(EntityManager dstManager)
         {
             var startingGroundEntity =
                 dstManager.Instantiate(_startingGroundEntityPrototype);
-            // dstManager.SetName(startingGroundEntity,
-                // "[GO] StartingGround");
+#if UNITY_EDITOR
+            dstManager.SetName(startingGroundEntity,
+                "[GO] StartingGround");
+#endif
             dstManager.SetComponentData(startingGroundEntity, new Translation
             {
                 Value = float3.zero
@@ -97,7 +101,9 @@ namespace FastCube.Behaviours
             for (var i = 0; i < initialTilesCount; i++)
             {
                 var groundEntity = dstManager.Instantiate(groundPrefabEntity);
-                // dstManager.SetName(groundEntity, $"[GO] Ground[{i}]");
+#if UNITY_EDITOR
+                dstManager.SetName(groundEntity, $"[GO] Ground[{i}]");
+#endif
                 var nextPosition = Generator.PickNextPosition(stepSize, lastPosition);
                 lastPosition = nextPosition;
                 dstManager.SetComponentData(groundEntity, new Translation
@@ -112,7 +118,13 @@ namespace FastCube.Behaviours
         private void SpawnPlayer(EntityManager dstManager)
         {
             var playerEntity = dstManager.Instantiate(_playerEntityPrototype);
-            // dstManager.SetName(playerEntity, "[GO] Player");
+#if UNITY_EDITOR
+            dstManager.SetName(playerEntity, "[GO] Player");
+#endif
+            dstManager.AddComponentData(playerEntity, new Score
+            {
+                Value = 0
+            });
         }
     }
 }

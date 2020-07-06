@@ -1,3 +1,4 @@
+using System;
 using FastCube.Components;
 using FastCube.Generated;
 using Unity.Entities;
@@ -62,31 +63,50 @@ namespace FastCube.Systems
                         if (!grounded.Value) return;
 
                         if (math.abs(horizontalAxis) > .1f)
-                            ecb.AddComponent(entityInQueryIndex, entity, new MoveToTarget
-                            {
-                                OriginalPosition = translation.Value,
-                                TargetPosition = translation.Value +
-                                                 new float3(
-                                                     horizontalAxis > 0f
-                                                         ? MoveDistance
-                                                         : -MoveDistance, 0f, 0f),
-                                TimeElapsed = 0f
-                            });
+                            ecb.AddComponent(entityInQueryIndex, entity,
+                                CreateMoveToTargetComponent(MovementAxis.Horizontal,
+                                    translation.Value, horizontalAxis));
 
                         if (math.abs(verticalAxis) > .1f)
-                            ecb.AddComponent(entityInQueryIndex, entity, new MoveToTarget
-                            {
-                                OriginalPosition = translation.Value,
-                                TargetPosition = translation.Value +
-                                                 new float3(0f, 0f,
-                                                     verticalAxis > 0f
-                                                         ? MoveDistance
-                                                         : -MoveDistance),
-                                TimeElapsed = 0f
-                            });
+                            ecb.AddComponent(entityInQueryIndex, entity,
+                                CreateMoveToTargetComponent(MovementAxis.Vertical,
+                                    translation.Value, verticalAxis));
                     }).Schedule();
 
             _commandBufferSystem.AddJobHandleForProducer(Dependency);
+        }
+
+        private static MoveToTarget CreateMoveToTargetComponent(MovementAxis axis, float3 position,
+            float inputValue)
+        {
+            float3 targetPosition;
+            switch (axis)
+            {
+                case MovementAxis.Horizontal:
+                    targetPosition = position +
+                                     new float3(inputValue > 0f ? MoveDistance : -MoveDistance,
+                                         float2.zero);
+                    break;
+                case MovementAxis.Vertical:
+                    targetPosition = position + new float3(float2.zero,
+                        inputValue > 0f ? MoveDistance : -MoveDistance);
+                    break;
+                default:
+                    throw new Exception("Invalid axis");
+            }
+
+            return new MoveToTarget
+            {
+                OriginalPosition = position,
+                TargetPosition = targetPosition,
+                TimeElapsed = 0f
+            };
+        }
+
+        private enum MovementAxis
+        {
+            Vertical,
+            Horizontal
         }
     }
 }

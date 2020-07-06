@@ -19,8 +19,7 @@ namespace FastCube.Systems
                 var newTilesCount = 0;
                 for (var i = levelData.CurrentTilesCount; i <= levelData.MinimumTilesCount; i++)
                 {
-                    lastPosition =
-                        Generator.PickNextPosition(levelData.StepSize, lastPosition);
+                    lastPosition = Generator.PickNextPosition(levelData.StepSize, lastPosition);
                     newTilesCount++;
 
                     var newGroundEntity = EntityManager.Instantiate(levelData.GroundEntityPrefab);
@@ -37,7 +36,6 @@ namespace FastCube.Systems
             }
             catch (InvalidOperationException e)
             {
-                // No level data yet
             }
         }
     }

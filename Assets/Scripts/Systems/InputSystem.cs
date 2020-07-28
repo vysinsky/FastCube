@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 namespace FastCube.Systems
 {
@@ -17,6 +18,8 @@ namespace FastCube.Systems
 
         private float2 _input = float2.zero;
 
+        private ScreenInfo _screenInfo;
+
         private InputActions _inputActions;
 
         public void OnMove(InputAction.CallbackContext context)
@@ -24,9 +27,42 @@ namespace FastCube.Systems
             _input = new float2(context.ReadValue<Vector2>());
         }
 
+        public void OnTouchMove(InputAction.CallbackContext context)
+        {
+            var rawInput = Touchscreen.current.primaryTouch.position.ReadValue();
+            Debug.Log($"Screen: {_screenInfo.HalfWidth}; {_screenInfo.HalfHeight}");
+            Debug.Log($"Input: {rawInput.x}; {rawInput.y}");
+            // Left part of screen, move down or left
+            if (rawInput.x < _screenInfo.HalfWidth)
+            {
+                if (rawInput.y < _screenInfo.HalfHeight)
+                {
+                    _input = new float2(0f ,-1f);
+                }
+                else
+                {
+                   _input = new float2(-1f ,0f);
+                }
+            }
+
+            // Right part of screen, move up or right
+            if (rawInput.x > _screenInfo.HalfWidth)
+            {
+                if (rawInput.y < _screenInfo.HalfHeight)
+                {
+                    _input = new float2(1f ,0f);
+                }
+                else
+                {
+                    _input = new float2(0f ,1f);
+                }
+            }
+        }
+
         protected override void OnCreate()
         {
             base.OnCreate();
+            _screenInfo = new ScreenInfo(Screen.width, Screen.height);
             _commandBufferSystem =
                 World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
 
@@ -52,7 +88,7 @@ namespace FastCube.Systems
             var verticalAxis = _input.y;
             _input = float2.zero;
 
-            var ecb = _commandBufferSystem.CreateCommandBuffer().ToConcurrent();
+            var ecb = _commandBufferSystem.CreateCommandBuffer().AsParallelWriter();
             Entities
                 .WithNone<MoveToTarget>()
                 .ForEach(
@@ -107,6 +143,22 @@ namespace FastCube.Systems
         {
             Vertical,
             Horizontal
+        }
+
+        private struct ScreenInfo
+        {
+            public readonly float Width;
+            public readonly float Height;
+            public readonly float HalfWidth;
+            public readonly float HalfHeight;
+
+            public ScreenInfo(float width, float height)
+            {
+                Width = width;
+                Height = height;
+                HalfWidth = width / 2;
+                HalfHeight = height / 2;
+            }
         }
     }
 }

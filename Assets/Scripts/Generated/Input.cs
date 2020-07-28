@@ -27,6 +27,14 @@ namespace FastCube.Generated
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""TouchMove"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""9a46f007-e972-4e44-a6df-b6da54c2f8f2"",
+                    ""expectedControlType"": ""Touch"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(pressPoint=0.1)""
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,17 @@ namespace FastCube.Generated
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6757fa0-f0b9-4b40-b798-b298e3d7f870"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touchscreen"",
+                    ""action"": ""TouchMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -150,7 +169,18 @@ namespace FastCube.Generated
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Touchscreen"",
+            ""bindingGroup"": ""Touchscreen"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Touchscreen>"",
+                    ""isOptional"": true,
                     ""isOR"": false
                 }
             ]
@@ -160,6 +190,7 @@ namespace FastCube.Generated
             // Gameplay
             m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
             m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+            m_Gameplay_TouchMove = m_Gameplay.FindAction("TouchMove", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -210,11 +241,13 @@ namespace FastCube.Generated
         private readonly InputActionMap m_Gameplay;
         private IGameplayActions m_GameplayActionsCallbackInterface;
         private readonly InputAction m_Gameplay_Move;
+        private readonly InputAction m_Gameplay_TouchMove;
         public struct GameplayActions
         {
             private @InputActions m_Wrapper;
             public GameplayActions(@InputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+            public InputAction @TouchMove => m_Wrapper.m_Gameplay_TouchMove;
             public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -227,6 +260,9 @@ namespace FastCube.Generated
                     @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                    @TouchMove.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTouchMove;
+                    @TouchMove.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTouchMove;
+                    @TouchMove.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTouchMove;
                 }
                 m_Wrapper.m_GameplayActionsCallbackInterface = instance;
                 if (instance != null)
@@ -234,6 +270,9 @@ namespace FastCube.Generated
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @TouchMove.started += instance.OnTouchMove;
+                    @TouchMove.performed += instance.OnTouchMove;
+                    @TouchMove.canceled += instance.OnTouchMove;
                 }
             }
         }
@@ -247,9 +286,19 @@ namespace FastCube.Generated
                 return asset.controlSchemes[m_KeyboardSchemeIndex];
             }
         }
+        private int m_TouchscreenSchemeIndex = -1;
+        public InputControlScheme TouchscreenScheme
+        {
+            get
+            {
+                if (m_TouchscreenSchemeIndex == -1) m_TouchscreenSchemeIndex = asset.FindControlSchemeIndex("Touchscreen");
+                return asset.controlSchemes[m_TouchscreenSchemeIndex];
+            }
+        }
         public interface IGameplayActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnTouchMove(InputAction.CallbackContext context);
         }
     }
 }

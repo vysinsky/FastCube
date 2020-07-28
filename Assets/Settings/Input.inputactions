@@ -12,6 +12,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "TouchMove",
+                    "type": "PassThrough",
+                    "id": "9a46f007-e972-4e44-a6df-b6da54c2f8f2",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "Press(pressPoint=0.1)"
                 }
             ],
             "bindings": [
@@ -124,6 +132,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "b6757fa0-f0b9-4b40-b798-b298e3d7f870",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "TouchMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -135,7 +154,18 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
-                    "isOptional": false,
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Touchscreen",
+            "bindingGroup": "Touchscreen",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
+                    "isOptional": true,
                     "isOR": false
                 }
             ]

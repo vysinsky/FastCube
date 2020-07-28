@@ -24,7 +24,7 @@ namespace FastCube.Systems
         {
             var deltaTime = Time.DeltaTime;
 
-            var ecb = _commandBufferSystem.CreateCommandBuffer().ToConcurrent();
+            var ecb = _commandBufferSystem.CreateCommandBuffer().AsParallelWriter();
 
             var scoreComponentEntities = GetComponentDataFromEntity<Score>();
 

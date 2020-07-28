@@ -22,7 +22,7 @@ namespace FastCube.Systems
                 var levelEntity = GetSingletonEntity<LevelGenerationData>();
                 var levelData = EntityManager.GetComponentData<LevelGenerationData>(levelEntity);
 
-                var cb = _commandBufferSystem.CreateCommandBuffer().ToConcurrent();
+                var cb = _commandBufferSystem.CreateCommandBuffer().AsParallelWriter();
                 Entities.ForEach(
                     (Entity entity, int entityInQueryIndex, in Lifetime lifetime) =>
                     {

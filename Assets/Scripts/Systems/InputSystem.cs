@@ -52,7 +52,7 @@ namespace FastCube.Systems
             var verticalAxis = _input.y;
             _input = float2.zero;
 
-            var ecb = _commandBufferSystem.CreateCommandBuffer().ToConcurrent();
+            var ecb = _commandBufferSystem.CreateCommandBuffer().AsParallelWriter();
             Entities
                 .WithNone<MoveToTarget>()
                 .ForEach(

@@ -21,7 +21,7 @@ namespace FastCube.Systems
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
                 // No player yet
             }

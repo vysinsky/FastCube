@@ -26,7 +26,7 @@ namespace FastCube.Behaviours
             {
                 _playerEntities.Dispose();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Nothing
             }

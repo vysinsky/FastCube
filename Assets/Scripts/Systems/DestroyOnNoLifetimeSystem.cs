@@ -37,7 +37,7 @@ namespace FastCube.Systems
 
                 _commandBufferSystem.AddJobHandleForProducer(Dependency);
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
                 // No level data yet
             }

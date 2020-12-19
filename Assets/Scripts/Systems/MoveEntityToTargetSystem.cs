@@ -7,8 +7,6 @@ using Unity.Transforms;
 
 namespace FastCube.Systems
 {
-    [UpdateAfter(typeof(ExportPhysicsWorld))]
-    [UpdateBefore(typeof(EndFramePhysicsSystem))]
     public class MoveEntityToTargetSystem : SystemBase
     {
         private EndSimulationEntityCommandBufferSystem _commandBufferSystem;

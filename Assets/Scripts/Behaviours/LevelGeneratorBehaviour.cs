@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DefaultNamespace.Behaviours;
 using FastCube.Components;
 using FastCube.LevelGenerationUtils;
 using Unity.Entities;
@@ -27,6 +28,8 @@ namespace FastCube.Behaviours
 
         [SerializeField] private GameObject groundPrefab;
         [SerializeField] private GameObject playerPrefab;
+
+        [SerializeField] private GameObject playerTracker;
 
         private Entity _groundEntityPrototype;
 
@@ -125,6 +128,9 @@ namespace FastCube.Behaviours
             {
                 Value = 0
             });
+
+            var followEntity = playerTracker.GetComponent<FollowEntityBehaviour>();
+            followEntity.EntityToFollow = playerEntity;
         }
     }
 }

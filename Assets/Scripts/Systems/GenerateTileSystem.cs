@@ -34,7 +34,7 @@ namespace FastCube.Systems
 
                 EntityManager.SetComponentData(levelEntity, levelData);
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
             }
         }

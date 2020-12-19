@@ -954,6 +954,6 @@ MonoBehaviour:
   minimumTilesCount: 20
   stepSize: 1.2
   startingGroundPrefab: {fileID: 7246773805013075031, guid: e9d10a2a560124d599830aeaa22e557c, type: 3}
-  groundPrefab: {fileID: 7246773805013075031, guid: e9d10a2a560124d599830aeaa22e557c, type: 3}
+  groundPrefab: {fileID: 7246773805013075031, guid: 0d720bcc48860457ebe11576a12ca918, type: 3}
   playerPrefab: {fileID: 7246773805013075031, guid: 4ae82042cb5ad4c3bb6f6bc093c90b4a, type: 3}
   playerTracker: {fileID: 1153748418}

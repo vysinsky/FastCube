@@ -128,6 +128,7 @@ namespace FastCube.Behaviours
             {
                 Value = 0
             });
+            dstManager.AddBuffer<InputBuffer>(playerEntity);
 
             var followEntity = playerTracker.GetComponent<FollowEntityBehaviour>();
             followEntity.EntityToFollow = playerEntity;

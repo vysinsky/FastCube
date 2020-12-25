@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 6802451812461760359}
   - component: {fileID: 358899637254527614}
   - component: {fileID: 3367749513840318598}
-  - component: {fileID: -4782793819834403047}
   - component: {fileID: 2736643740648816799}
   m_Layer: 0
   m_Name: Player
@@ -230,7 +229,23 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
+    m_BelongsTo_Deprecated:
+      m_Override: 0
+      m_Value: 
+    m_CollidesWith_Deprecated:
+      m_Override: 0
+      m_Value: 
+    m_CustomTags_Deprecated:
+      m_Override: 0
+      m_Value: 
+    m_IsTrigger_Deprecated:
+      m_Override: 0
+      m_Value: 0
+    m_RaisesCollisionEvents_Deprecated:
+      m_Override: 0
+      m_Value: 0
   m_SerializedVersion: 1
+  m_ConvexRadius_Deprecated: -1
 --- !u!114 &3865691935448862855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +259,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MotionType: 0
-  m_Smoothing: 0
   m_Mass: 1
   m_LinearDamping: 0.01
   m_AngularDamping: 0.05
@@ -319,18 +333,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Value: 0
---- !u!114 &-4782793819834403047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7246773805013075031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2736643740648816799
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -31,15 +31,8 @@ namespace FastCube.Systems
 
                 var input = inputBuffer[0].Value;
 
-                if (math.abs(input.x) > .1f)
-                    ecb.AddComponent(entityInQueryIndex, entity,
-                        CreateMoveToTargetComponent(MovementAxis.Horizontal,
-                            translation.Value, input.x));
-
-                if (math.abs(input.y) > .1f)
-                    ecb.AddComponent(entityInQueryIndex, entity,
-                        CreateMoveToTargetComponent(MovementAxis.Vertical, translation.Value,
-                            input.y));
+                ecb.AddComponent(entityInQueryIndex, entity,
+                    CreateMoveToTargetComponent(input, translation.Value));
 
                 inputBuffer.RemoveAt(0);
             }).Schedule();
@@ -48,33 +41,29 @@ namespace FastCube.Systems
         }
 
 
-        private static MoveToTarget CreateMoveToTargetComponent(MovementAxis axis, float3 position,
-            float inputValue)
+        private static MoveToTarget CreateMoveToTargetComponent(float2 input,
+            float3 currentPosition)
         {
-            var targetPosition = axis switch
+            var targetPosition = float3.zero;
+            if (math.abs(input.x) > .1f)
             {
-                MovementAxis.Horizontal => position +
-                                           new float3(
-                                               inputValue > 0f ? MoveDistance : -MoveDistance,
-                                               float2.zero),
-                MovementAxis.Vertical => position + new float3(float2.zero,
-                    inputValue > 0f ? MoveDistance : -MoveDistance),
+                targetPosition = currentPosition +
+                                 new float3(input.x > 0f ? MoveDistance : -MoveDistance,
+                                     float2.zero);
+            }
 
-                _ => throw new Exception("Invalid axis")
-            };
+            if (math.abs(input.y) > .1f)
+            {
+                targetPosition = currentPosition +
+                                 new float3(float2.zero, input.y > 0f ? MoveDistance : -MoveDistance);
+            }
 
             return new MoveToTarget
             {
-                OriginalPosition = position,
+                OriginalPosition = currentPosition,
                 TargetPosition = targetPosition,
                 TimeElapsed = 0f
             };
-        }
-
-        private enum MovementAxis
-        {
-            Vertical,
-            Horizontal
         }
     }
 }

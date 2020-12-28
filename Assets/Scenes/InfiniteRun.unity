@@ -302,12 +302,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 36
+  m_fontSize: 90
+  m_fontSizeBase: 86
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 64
-  m_fontSizeMax: 86
+  m_fontSizeMin: 90
+  m_fontSizeMax: 180
   m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -368,7 +368,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -20}
+  m_AnchoredPosition: {x: 100, y: -100}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &705507993
@@ -755,7 +755,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.1315441, y: 1}
+    m_SensorSize: {x: 0.47368422, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

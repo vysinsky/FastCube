@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="gameplay.uss" />
+    <ui:VisualElement class="gameplayUIContainer">
+        <ui:Label text="0" enable-rich-text="false" name="score-counter" class="scoreCounter" />
+    </ui:VisualElement>
+</ui:UXML>

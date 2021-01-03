@@ -747,6 +747,7 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Analytics: 1
     UNet: 1
   luminIcon:
     m_Name: 
@@ -761,7 +762,7 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 1
-  cloudProjectId: decf4a1b-7bc5-4eb3-bafb-06b6ddaf4643
+  cloudProjectId: 1651a0c1-efa2-4fb0-b3fa-6d845c8c38df
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: FastCube

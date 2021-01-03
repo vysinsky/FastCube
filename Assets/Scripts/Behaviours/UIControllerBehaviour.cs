@@ -1,22 +1,23 @@
 using System;
 using System.Linq;
 using FastCube.Components;
-using TMPro;
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace FastCube.Behaviours
 {
     public class UIControllerBehaviour : MonoBehaviour
     {
-        [SerializeField] private TMP_Text scoreText;
+        private Label _scoreCounterLabel;
         private EntityManager _em;
-
         private NativeArray<Entity> _playerEntities;
 
-        private void Start()
+        private void OnEnable()
         {
+            var rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
+            _scoreCounterLabel = rootVisualElement.Q<Label>("score-counter");
             _em = World.DefaultGameObjectInjectionWorld.EntityManager;
         }
 
@@ -48,7 +49,7 @@ namespace FastCube.Behaviours
             if (player != Entity.Null)
             {
                 var score = _em.GetComponentData<Score>(player);
-                scoreText.SetText($"{score.Value}");
+                _scoreCounterLabel.text = $"{score.Value}";
             }
 
             _playerEntities.Dispose();

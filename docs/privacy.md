@@ -1,6 +1,9 @@
 ﻿## Privacy
 
-FastCube is developed by [Michal Vyšinský](https://vysinsky.cz/). I know privacy and security is important to user of FastCube and this Privacy Policy will help you understand what information we collect, why we need it, and what we do with it. By using FastCube you agree to this policy.
+[FastCube](https://fastcube.vysinsky.cz) is developed by [Michal Vyšinský](https://vysinsky.cz/). I know privacy and security is important to user of FastCube and this Privacy Policy will help you understand what information we collect, why we need it, and what we do with it. By using FastCube you agree to this policy.
+
+### Analytics
+In order to improve FastCube I may collect usage statistics, such as the number of users, how often they play etc. FastCube uses Google Analytics for Firebase to collect this analytics data and you can [find more information here](https://policies.google.com/technologies/partner-sites).
 
 ### Children's Privacy
 You must be 13 years of age or older to use FastCube. I do not knowingly collect personal information from children under 13. Moreover, if you are younger than 18, then your parent or legal guardian must read and accept this Privacy Policy on your behalf.

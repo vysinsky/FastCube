@@ -5,6 +5,6 @@
   <string name="project_id" translatable="false">fastcube-aa004</string>
   <string name="google_api_key" translatable="false">AIzaSyAqRnoHphhdXQbovHfxjSG9VUVqTc_6xAY</string>
   <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAqRnoHphhdXQbovHfxjSG9VUVqTc_6xAY</string>
-  <string name="google_app_id" translatable="false">1:1029200168550:android:833237649c4b83e1334fa7</string>
+  <string name="google_app_id" translatable="false">1:1029200168550:android:6134aa1cf6e3579c334fa7</string>
   <string name="default_web_client_id" translatable="false">1029200168550-phmus737agpa30h4kibai24rnvq7e0md.apps.googleusercontent.com</string>
 </resources>

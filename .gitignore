@@ -45,3 +45,8 @@ sysinfo.txt
 
 Assets/SceneDependencyCache/*
 Logs
+
+Assets/Settings/google-services.json
+/Assets/Settings/google-services.json.meta
+/user.keystore
+/Assets/Firebase/

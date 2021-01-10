@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1029200168550",
+    "project_id": "fastcube-aa004",
+    "storage_bucket": "fastcube-aa004.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029200168550:android:833237649c4b83e1334fa7",
+        "android_client_info": {
+          "package_name": "cz.vysinsky.fastcube"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029200168550-phmus737agpa30h4kibai24rnvq7e0md.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqRnoHphhdXQbovHfxjSG9VUVqTc_6xAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029200168550-phmus737agpa30h4kibai24rnvq7e0md.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

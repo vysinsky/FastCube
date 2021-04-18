@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DefaultNamespace.Behaviours;
 using FastCube.Components;
@@ -66,7 +67,8 @@ namespace FastCube.Behaviours
         private void PrepareEntityPrototypes(EntityManager dstManager,
             GameObjectConversionSystem conversionSystem)
         {
-            var conversionSettings = conversionSystem.ForkSettings(1);
+            var blobAssetStore = new BlobAssetStore();
+            var conversionSettings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore);
             _playerEntityPrototype = GameObjectConversionUtility.ConvertGameObjectHierarchy(
                 playerPrefab, conversionSettings);
             _startingGroundEntityPrototype =
